@@ -34,4 +34,18 @@ public class DepartmentRepository {
         }
 
     }
+
+    public Department getDepartmentById(short id){
+        Session session = null;
+        try{
+            session = hibernateUtils.openSession();
+            Department department = session.get(Department.class,id);
+            return department;
+        }finally {
+            if(session != null){
+                session.close();
+            }
+        }
+    }
+
 }

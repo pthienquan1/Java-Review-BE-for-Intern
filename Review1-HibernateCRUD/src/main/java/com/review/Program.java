@@ -18,5 +18,9 @@ public class Program {
         for(Department d:departments){
             System.out.println(d);
         }
+
+        System.out.println("------GET DEPARTMENT BY ID-------");
+        Department department1 = repository.getDepartmentById((short) 1);
+        System.out.println(department1);
     }
 }
