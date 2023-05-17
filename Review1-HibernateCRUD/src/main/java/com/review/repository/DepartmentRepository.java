@@ -88,4 +88,29 @@ public class DepartmentRepository {
             }
         }
     }
+
+    public void deleteDepartment(short id) {
+
+        Session session = null;
+
+        try {
+
+            // get session
+            session = hibernateUtils.openSession();
+            session.beginTransaction();
+
+            // get department
+            Department department = (Department) session.load(Department.class, id);
+
+            // delete
+            session.delete(department);
+
+            session.getTransaction().commit();
+
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
 }
