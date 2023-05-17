@@ -22,5 +22,9 @@ public class Program {
         System.out.println("------GET DEPARTMENT BY ID-------");
         Department department1 = repository.getDepartmentById((short) 1);
         System.out.println(department1);
+
+        System.out.println("-----GET DEPARTMETN BY NAME-----");
+        Department department2 = repository.getDepartmentByName("BOD");
+        System.out.println(department2);
     }
 }

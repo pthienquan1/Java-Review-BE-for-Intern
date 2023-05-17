@@ -48,4 +48,18 @@ public class DepartmentRepository {
         }
     }
 
+    public Department getDepartmentByName(String name) {
+        Session session = null;
+        try {
+            session = hibernateUtils.openSession();
+            Query<Department> query = session.createQuery("FROM Department WHERE name = :nameParameter");
+            query.setParameter("nameParameter", name);
+            Department dept = query.uniqueResult();
+            return dept;
+        } finally {
+            if ( session != null ) {
+                session.close();
+            }
+        }
+    }
 }
