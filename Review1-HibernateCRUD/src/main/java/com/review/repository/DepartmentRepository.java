@@ -74,4 +74,18 @@ public class DepartmentRepository {
             }
         }
     }
+    public void updateDepartment(short id, String name){
+        Session session = null;
+        try{
+            session = hibernateUtils.openSession();
+            session.beginTransaction();
+            Department dept = (Department) session.load(Department.class,id);
+            dept.setName(name);
+            session.getTransaction().commit();
+        }finally {
+            if(session != null){
+                session.close();
+            }
+        }
+    }
 }

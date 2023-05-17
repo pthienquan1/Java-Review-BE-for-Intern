@@ -27,9 +27,12 @@ public class Program {
         Department department2 = repository.getDepartmentByName("BOD");
         System.out.println(department2);
 
-        System.out.println("----CREATE DEPARTMENT------");
-        Department department3 = new Department();
-        department3.setName("Test01");
-        repository.createDepartment(department3);
+//        System.out.println("----CREATE DEPARTMENT------");
+//        Department department3 = new Department();
+//        department3.setName("Test01");
+//        repository.createDepartment(department3);
+
+        System.out.println("----UPDATE DEPARTMENT-----");
+        repository.updateDepartment((short) 2,"Update");
     }
 }
