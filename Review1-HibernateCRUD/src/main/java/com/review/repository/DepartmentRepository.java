@@ -62,4 +62,16 @@ public class DepartmentRepository {
             }
         }
     }
+
+    public void createDepartment(Department dept) {
+        Session session = null;
+        try {
+            session = hibernateUtils.openSession();
+            session.save(dept);
+        } finally {
+            if ( session != null ) {
+                session.close();
+            }
+        }
+    }
 }
