@@ -1,0 +1,37 @@
+package com.review.repository;
+
+import com.review.entity.Department;
+import com.review.utils.HibernateUtils;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
+import java.util.List;
+
+/**
+ * Created by quan0
+ * Date 5/17/2023 - 2:14 PM
+ * Description: ...
+ */
+public class DepartmentRepository {
+    private HibernateUtils hibernateUtils;
+
+    public DepartmentRepository(){
+        hibernateUtils = HibernateUtils.getInstance();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Department> getAllDepartment(){
+        Session session = null;
+        try{
+            session = hibernateUtils.openSession();
+
+            Query<Department> query = session.createQuery("FROM Department");
+            return query.list();
+        }finally {
+            if(session != null){
+                session.close();
+            }
+        }
+
+    }
+}
