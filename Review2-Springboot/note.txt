@@ -1,0 +1,31 @@
+@RequestParam được sử dụng để truy cập (lấy) giá trị của parameters trên URL(kiểu query string)
+-> truyền trong hàm
+@PathVariable được sử dụng để lấy giá trị trên URI theo template (còn gọi là URI template).
+-> truyền trong annotation (( ví dụ truyền trong @Getmapping thêm tham số {id})
+
+API(Aplication Programming Interface
+--> FE call API tới BE, BE sử dụng jdbc/hibernate/jpa để query xuống tới DB
+--> Sau khi lấy được các dữ liệu, BE trả lại dữ liệu cho FE bằng các data có dạng JSON/XML(format)
+
+Restful API: tiêu chuẩn để tạo ra các API cho các ứng dụng applications(GET/POST/PUT/DELETE)
+--> nguyên tắc: ko đc sài động từ
+VD: 
+GET: http://localhost:8080/api/v1/departments 
+thêm id thì /api/v1/departments/{id}
+POST: http://localhost:8080/api/v1/departments (request body)
+UPDATE: http://localhost:8080/api/v1/departments/5 (request body)
+DELETE http://localhost:8080/api/v1/departments/5
+
+HATEOAS: json lồng/nhúng (Embedded)
+
+SOLID principle:
+1.Single responsibility: 1 class chỉ nên giữ 1 trách nhiệm
+2.Open/Closed: muốn sửa  1 hàm gì đó thì nên  tạo 1 class mới, extend từ class cũ. Từ đó class
+mới đó vẫn xài đc hàm cũ từ class cũ
+3.Liskov substitution: khi tạo ra lớp con để thay thế lớp cha, thì khi thằng con này ném ở mọi chỗ
+dùng thằng cha thì vẫn phải work dc 1 cách hoàn chỉnh, ko đc lỗi
+ví dụ có class A là cha, class B extend class A và class B' extend class B. thì khi như vậy thì
+class B' không được lỗi khi class A chạy
+4.Interface segregation: chia đối tượng theo các interface cụ thể
+5.Dependency inversion:
+--> nên phụ thuộc vào abtraction/interface
