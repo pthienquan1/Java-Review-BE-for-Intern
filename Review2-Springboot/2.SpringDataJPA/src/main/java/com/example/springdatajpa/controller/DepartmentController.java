@@ -4,6 +4,8 @@ import com.example.springdatajpa.entity.Department;
 import com.example.springdatajpa.form.DepartmentForm;
 import com.example.springdatajpa.service.IDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,9 +21,13 @@ public class DepartmentController {
     @Autowired
     IDepartmentService service;
 
+//    @GetMapping()
+//    public List<Department> getAllDepartment(){
+//        return service.getAllDepartments();
+//    }
     @GetMapping()
-    public List<Department> getAllDepartment(){
-        return service.getAllDepartments();
+    public Page<Department> getAllDepartments(Pageable pageable){
+        return service.getAllDepartments(pageable);
     }
     @GetMapping(value= "/{id}")
     public Department getDepartmentById(@PathVariable(name="id") int id){
@@ -34,5 +40,10 @@ public class DepartmentController {
     @PostMapping
     public void createDepartment(@RequestBody DepartmentForm form){
         service.createDepartment(form.toEntity());
+    }
+
+    @PutMapping("/update")
+    public void updateDepartment(@RequestParam(name="id",value = "") int id, @RequestParam(name = "name" ,value="")String newName){
+        service.updateDepartment2(id,newName);
     }
 }

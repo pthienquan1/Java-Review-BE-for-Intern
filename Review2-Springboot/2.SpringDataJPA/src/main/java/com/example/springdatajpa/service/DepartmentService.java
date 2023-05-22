@@ -3,6 +3,8 @@ package com.example.springdatajpa.service;
 import com.example.springdatajpa.entity.Department;
 import com.example.springdatajpa.repository.IDepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +19,10 @@ public class DepartmentService implements IDepartmentService{
     @Autowired
     private IDepartmentRepository repository;
 
-    @Override
-    public List<Department> getAllDepartments(){
-        return repository.findAll();
-    }
+//    @Override
+//    public List<Department> getAllDepartments(){
+//        return repository.findAll();
+//    }
     @Override
     public Department getDepartmentById(int id){
         return repository.findById(id).get();
@@ -41,5 +43,18 @@ public class DepartmentService implements IDepartmentService{
     @Override
     public void deleteDepartmentById(int id){
         repository.deleteById(id);
+    }
+
+
+    @Override
+    public Page<Department> getAllDepartments(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+    @Override
+    public void updateDepartment2(int id, String newName) {
+        Department department = repository.findById(id).get();
+        department.setDepartmentName(newName);
+        repository.save(department);
     }
 }
