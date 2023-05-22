@@ -3,6 +3,8 @@ package com.example.review3.controller;
 import com.example.review3.dto.AccountDTO;
 import com.example.review3.entity.Account;
 import com.example.review3.service.IAccountService;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,22 +25,37 @@ public class AccountController {
 
     @Autowired
     private IAccountService service;
+    @Autowired
+    private ModelMapper modelMapper;
 
+//    @GetMapping()
+//    public List<AccountDTO> getAllAccounts(){
+//        List<Account> entities = service.getAllAccounts();
+//        List<AccountDTO> dtos = new ArrayList<>();
+//        for(Account entity:entities){
+//            AccountDTO dto = new AccountDTO(entity.getUsername(),entity.getDepartment().getName());
+//            dtos.add(dto);
+//        }
+//        return dtos;
+//    }
     @GetMapping()
     public List<AccountDTO> getAllAccounts(){
         List<Account> entities = service.getAllAccounts();
-        List<AccountDTO> dtos = new ArrayList<>();
-        for(Account entity:entities){
-            AccountDTO dto = new AccountDTO(entity.getUsername(),entity.getDepartment().getName());
-            dtos.add(dto);
-        }
+        List<AccountDTO> dtos = modelMapper.map(entities, new TypeToken<List<AccountDTO>>() {
+        }.getType());
         return dtos;
     }
 
+//    @GetMapping(value="/{id}")
+//    public AccountDTO getAccountById(@PathVariable(name="id") int id){
+//        Account entity = service.getAccountByID(id);
+//        AccountDTO dto = new AccountDTO(entity.getUsername(),entity.getDepartment().getName());
+//        return dto;
+//    }
     @GetMapping(value="/{id}")
     public AccountDTO getAccountById(@PathVariable(name="id") int id){
         Account entity = service.getAccountByID(id);
-        AccountDTO dto = new AccountDTO(entity.getUsername(),entity.getDepartment().getName());
+        AccountDTO dto = modelMapper.map(entity,AccountDTO.class);
         return dto;
     }
 }

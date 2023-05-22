@@ -1,6 +1,7 @@
 package com.example.review3.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Data
 @RequiredArgsConstructor
+@NoArgsConstructor
 public class AccountDTO {
     @NonNull
     private String username;
