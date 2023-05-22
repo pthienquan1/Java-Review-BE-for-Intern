@@ -1,6 +1,7 @@
 package com.example.review3.specification;
 
 import com.example.review3.entity.Account;
+import com.example.review3.form.DepartmentFilterForm;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -18,13 +19,33 @@ import javax.persistence.criteria.Root;
  */
 public class AccountSpecification {
     @SuppressWarnings("deprecation")
-    public static Specification<Account> buildWhere(String search){
-        if( StringUtils.isEmpty(search) ){
-            return null;
+    public static Specification<Account> buildWhere(String search, DepartmentFilterForm filterForm) {
+        Specification<Account> where = null;
+//        if( StringUtils.isEmpty(search) ){
+//            return null;
+//        }
+        if ( !StringUtils.isEmpty(search) ) {
+            search = search.trim();
+            CustomSpecification name = new CustomSpecification("username", search);
+            where = Specification.where(name);
         }
-        search = search.trim();
-        CustomSpecification name = new CustomSpecification("username",search);
-        return Specification.where(name);
+        if ( filterForm != null && filterForm.getMinId() != null ) {
+            CustomSpecification minId = new CustomSpecification("minId", filterForm.getMinId());
+            if ( where == null ) {
+                where = minId;
+            } else {
+                where = where.and(minId);
+            }
+        }
+        if ( filterForm != null && filterForm.getMaxId() != null ) {
+            CustomSpecification maxId = new CustomSpecification("maxId", filterForm.getMaxId());
+            if ( where == null ) {
+                where = maxId;
+            } else {
+                where = where.and(maxId);
+            }
+        }
+        return where;
     }
 }
 
@@ -41,6 +62,12 @@ class CustomSpecification implements Specification<Account>{
     public Predicate toPredicate(Root<Account> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         if(field.equalsIgnoreCase("username")){
             return criteriaBuilder.like(root.get("username"), "%" +value.toString() + "%");
+        }
+        if(field.equalsIgnoreCase("minId")){
+            return criteriaBuilder.greaterThanOrEqualTo(root.get("id"), value.toString());
+        }
+        if(field.equalsIgnoreCase("maxId")){
+            return criteriaBuilder.lessThanOrEqualTo(root.get("id"), value.toString());
         }
         return null;
     }

@@ -1,6 +1,7 @@
 package com.example.review3.service;
 
 import com.example.review3.entity.Account;
+import com.example.review3.form.DepartmentFilterForm;
 import com.example.review3.repository.IAccountRepository;
 import com.example.review3.service.IAccountService;
 import com.example.review3.specification.AccountSpecification;
@@ -32,8 +33,8 @@ public class AccountService implements IAccountService {
         return repository.findById(id).get();
     }
 
-    public Page<Account> getAllAccounts(Pageable pageable, String search){
-        Specification<Account> where = AccountSpecification.buildWhere(search);
+    public Page<Account> getAllAccounts(Pageable pageable, String search, DepartmentFilterForm filterForm){
+        Specification<Account> where = AccountSpecification.buildWhere(search,filterForm);
         return repository.findAll(where,pageable);
     }
 }

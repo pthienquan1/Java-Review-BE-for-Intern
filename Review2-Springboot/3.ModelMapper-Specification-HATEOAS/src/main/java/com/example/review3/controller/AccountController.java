@@ -2,6 +2,7 @@ package com.example.review3.controller;
 
 import com.example.review3.dto.AccountDTO;
 import com.example.review3.entity.Account;
+import com.example.review3.form.DepartmentFilterForm;
 import com.example.review3.service.IAccountService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -47,8 +48,9 @@ public class AccountController {
 
 
     @GetMapping()
-    public Page<AccountDTO> getAllAccounts(Pageable pageable, @RequestParam(value="search",required = false) String search){
-        Page<Account> entitiesPage = service.getAllAccounts(pageable,search);
+    public Page<AccountDTO> getAllAccounts(Pageable pageable, @RequestParam(value="search",required = false) String search,
+                                           DepartmentFilterForm filterForm){
+        Page<Account> entitiesPage = service.getAllAccounts(pageable,search,filterForm);
         List<AccountDTO> dtos = modelMapper.map(entitiesPage.getContent(), new TypeToken<List<AccountDTO>>() {}.getType());
         Page<AccountDTO> dtosPages = new PageImpl<>(dtos,pageable,entitiesPage.getTotalElements());
         return dtosPages;
