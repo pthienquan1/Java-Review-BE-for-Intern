@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Description: ...
  */
 public interface IDepartmentRepository extends JpaRepository<Department,Integer> {
-
-
+    public Department findByDepartmentName(String name);
+    
 }

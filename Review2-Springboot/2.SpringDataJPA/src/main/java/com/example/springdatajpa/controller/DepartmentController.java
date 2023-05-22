@@ -27,6 +27,10 @@ public class DepartmentController {
     public Department getDepartmentById(@PathVariable(name="id") int id){
         return service.getDepartmentById(id);
     }
+    @GetMapping(value="/name/{name}")
+    public Department getDepartmentByName(@PathVariable(name="name") String name){
+        return service.getDepartmentByName(name);
+    }
     @PostMapping
     public void createDepartment(@RequestBody DepartmentForm form){
         service.createDepartment(form.toEntity());

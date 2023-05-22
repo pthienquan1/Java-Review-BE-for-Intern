@@ -29,3 +29,9 @@ class B' không được lỗi khi class A chạy
 4.Interface segregation: chia đối tượng theo các interface cụ thể
 5.Dependency inversion:
 --> nên phụ thuộc vào abtraction/interface
+
+
+
+SPRING DATA JPA
+- Làm việc với cả sql và nosql
+-->CUSTOM QUERY: method names

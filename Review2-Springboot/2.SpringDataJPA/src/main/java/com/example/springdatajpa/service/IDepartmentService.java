@@ -12,6 +12,7 @@ import java.util.List;
 public interface IDepartmentService {
     public List<Department> getAllDepartments();
     public Department getDepartmentById(int id);
+    public Department getDepartmentByName(String name);
     public void createDepartment(Department department);
     public void updateDepartment(Department department);
     public void deleteDepartmentById(int id);
