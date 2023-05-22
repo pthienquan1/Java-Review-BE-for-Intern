@@ -6,12 +6,11 @@ import com.example.review3.service.IAccountService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,14 +37,22 @@ public class AccountController {
 //        }
 //        return dtos;
 //    }
-    @GetMapping()
-    public List<AccountDTO> getAllAccounts(){
-        List<Account> entities = service.getAllAccounts();
-        List<AccountDTO> dtos = modelMapper.map(entities, new TypeToken<List<AccountDTO>>() {
-        }.getType());
-        return dtos;
-    }
+//    @GetMapping()
+//    public List<AccountDTO> getAllAccounts(){
+//        List<Account> entities = service.getAllAccounts();
+//        List<AccountDTO> dtos = modelMapper.map(entities, new TypeToken<List<AccountDTO>>() {
+//        }.getType());
+//        return dtos;
+//    }
 
+
+    @GetMapping()
+    public Page<AccountDTO> getAllAccounts(Pageable pageable, @RequestParam(value="search",required = false) String search){
+        Page<Account> entitiesPage = service.getAllAccounts(pageable,search);
+        List<AccountDTO> dtos = modelMapper.map(entitiesPage.getContent(), new TypeToken<List<AccountDTO>>() {}.getType());
+        Page<AccountDTO> dtosPages = new PageImpl<>(dtos,pageable,entitiesPage.getTotalElements());
+        return dtosPages;
+    }
 //    @GetMapping(value="/{id}")
 //    public AccountDTO getAccountById(@PathVariable(name="id") int id){
 //        Account entity = service.getAccountByID(id);
