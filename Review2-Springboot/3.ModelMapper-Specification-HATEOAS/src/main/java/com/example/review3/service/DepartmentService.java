@@ -3,7 +3,11 @@ package com.example.review3.service;
 import com.example.review3.entity.Department;
 import com.example.review3.repository.IDepartmentRepository;
 import com.example.review3.service.IDepartmentService;
+import com.example.review3.specification.DepartmentSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,9 +22,15 @@ public class DepartmentService implements IDepartmentService {
     @Autowired
     private IDepartmentRepository repository;
 
+//    @Override
+//    public List<Department> getAllDepartments() {
+//        return repository.findAll();
+//    }
+
     @Override
-    public List<Department> getAllDepartments() {
-        return repository.findAll();
+    public Page<Department> getAllDepartments(Pageable pageable, String search) {
+        Specification<Department> where = DepartmentSpecification.buildWhere(search);
+        return repository.findAll(where,pageable);
     }
 
     @Override
