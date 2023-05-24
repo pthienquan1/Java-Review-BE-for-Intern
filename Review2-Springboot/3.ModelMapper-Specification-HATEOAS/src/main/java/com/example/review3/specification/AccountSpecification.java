@@ -27,7 +27,8 @@ public class AccountSpecification {
         if ( !StringUtils.isEmpty(search) ) {
             search = search.trim();
             CustomSpecification name = new CustomSpecification("username", search);
-            where = Specification.where(name);
+            CustomSpecification departmentName = new CustomSpecification(("departmentName"),search);
+            where = Specification.where(name).or(departmentName);
         }
         if ( filterForm != null && filterForm.getMinId() != null ) {
             CustomSpecification minId = new CustomSpecification("minId", filterForm.getMinId());
@@ -68,6 +69,9 @@ class CustomSpecification implements Specification<Account>{
         }
         if(field.equalsIgnoreCase("maxId")){
             return criteriaBuilder.lessThanOrEqualTo(root.get("id"), value.toString());
+        }
+        if(field.equalsIgnoreCase("departmentName")){
+            return criteriaBuilder.like(root.get("department").get("name"), "%" + value.toString() + "%");
         }
         return null;
     }

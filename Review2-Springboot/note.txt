@@ -34,4 +34,21 @@ class B' không được lỗi khi class A chạy
 
 SPRING DATA JPA
 - Làm việc với cả sql và nosql
--->CUSTOM QUERY: method names
+-->CUSTOM QUERY: method names (hỗ trợ tự tạo ra các câu truy vấn mà mình mong muốn)
+-->Sử dụng @Query Annotations: tự viết câu truy vấn
+
+PAGING & sort
+--> sử dụng Page để trả về danh sách và tham số trong parameter là Pageable
+--> hỗ trợ sort khi truyền tham số có dạng &sort 
+
+Lombok
+-->giảm bớt thời gian và giảm bớt lượng code khi viết getter setter constructor không tham số,...
+
+MODELMAPPER
+--> các embedded json lồng nhau nên sử dụng model mapper thông qua DTO để giảm bớt nhiều thông tin 
+không cần thiết (có thể sử dụng dto không cần modelmapper)
+
+SPECIFICATION
+-->Thêm 1 trương truy vấn (where) truy vấn linh hoạt và phức tạp
+
+
