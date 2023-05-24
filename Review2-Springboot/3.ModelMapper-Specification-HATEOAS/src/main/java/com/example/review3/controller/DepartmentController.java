@@ -2,6 +2,7 @@ package com.example.review3.controller;
 
 import com.example.review3.dto.DepartmentDTO;
 import com.example.review3.entity.Department;
+import com.example.review3.form.DepartmentFilterForm;
 import com.example.review3.service.IDepartmentService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -23,16 +24,27 @@ import java.util.List;
  */@RestController
 @RequestMapping("/api/v1/departments")
 public class DepartmentController {
-     @Autowired
-     private IDepartmentService service;
-     @Autowired
+    @Autowired
+    private IDepartmentService service;
+
+    @Autowired
     private ModelMapper modelMapper;
 
-     @GetMapping()
-    public Page<DepartmentDTO> getAllDepartments(Pageable pageable, @RequestParam(name="search", required = false) String search){
-         Page<Department> entityPages = service.getAllDepartments(pageable,search);
-         List<DepartmentDTO> dtos = modelMapper.map(entityPages.getContent(), new TypeToken<List<DepartmentDTO>>() {}.getType());
-         Page<DepartmentDTO> dtoPages = new PageImpl<>(dtos,pageable,entityPages.getTotalElements());
-         return dtoPages;
-     }
+    @GetMapping()
+    public Page<DepartmentDTO> getAllDepartments(
+            Pageable pageable,
+            @RequestParam(name = "search", required = false) String search,
+            DepartmentFilterForm filterForm) {
+        Page<Department> entityPages = service.getAllDepartments(pageable, search, filterForm);
+
+        // convert entities --> dtos
+        List<DepartmentDTO> dtos = modelMapper.map(
+                entityPages.getContent(),
+                new TypeToken<List<DepartmentDTO>>() {}.getType());
+
+        Page<DepartmentDTO> dtoPages = new PageImpl<>(dtos, pageable, entityPages.getTotalElements());
+
+        return dtoPages;
+
+    }
 }

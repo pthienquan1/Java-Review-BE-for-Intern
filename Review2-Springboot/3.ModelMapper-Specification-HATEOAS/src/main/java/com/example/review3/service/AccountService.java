@@ -1,17 +1,14 @@
 package com.example.review3.service;
 
 import com.example.review3.entity.Account;
-import com.example.review3.form.DepartmentFilterForm;
+import com.example.review3.form.AccountFilterForm;
 import com.example.review3.repository.IAccountRepository;
-import com.example.review3.service.IAccountService;
 import com.example.review3.specification.AccountSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Created by quan0
@@ -33,7 +30,7 @@ public class AccountService implements IAccountService {
         return repository.findById(id).get();
     }
 
-    public Page<Account> getAllAccounts(Pageable pageable, String search, DepartmentFilterForm filterForm){
+    public Page<Account> getAllAccounts(Pageable pageable, String search, AccountFilterForm filterForm){
         Specification<Account> where = AccountSpecification.buildWhere(search,filterForm);
         return repository.findAll(where,pageable);
     }

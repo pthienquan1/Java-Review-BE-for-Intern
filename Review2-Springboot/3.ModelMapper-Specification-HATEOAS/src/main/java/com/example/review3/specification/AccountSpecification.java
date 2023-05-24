@@ -1,7 +1,7 @@
 package com.example.review3.specification;
 
 import com.example.review3.entity.Account;
-import com.example.review3.form.DepartmentFilterForm;
+import com.example.review3.form.AccountFilterForm;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -19,7 +19,7 @@ import javax.persistence.criteria.Root;
  */
 public class AccountSpecification {
     @SuppressWarnings("deprecation")
-    public static Specification<Account> buildWhere(String search, DepartmentFilterForm filterForm) {
+    public static Specification<Account> buildWhere(String search, AccountFilterForm filterForm) {
         Specification<Account> where = null;
 //        if( StringUtils.isEmpty(search) ){
 //            return null;

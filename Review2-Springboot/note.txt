@@ -50,5 +50,11 @@ không cần thiết (có thể sử dụng dto không cần modelmapper)
 
 SPECIFICATION
 -->Thêm 1 trương truy vấn (where) truy vấn linh hoạt và phức tạp
+--> 2 CONDITION, 3 CONDITION ĐƯỢC
+--> Nested attribute: lồng qua khóa ngoại trỏ tới bảng khác được
+-->List
+...
 
+HATEOAS:
+cung cấp 1 số thông tin phụ cho API
 
