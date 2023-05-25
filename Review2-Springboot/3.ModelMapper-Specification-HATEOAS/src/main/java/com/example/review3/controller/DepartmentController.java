@@ -2,7 +2,7 @@ package com.example.review3.controller;
 
 import com.example.review3.dto.DepartmentDTO;
 import com.example.review3.entity.Department;
-import com.example.review3.form.DepartmentFilterForm;
+import com.example.review3.form.DepartmentFilterFormm;
 import com.example.review3.service.IDepartmentService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -34,7 +34,7 @@ public class DepartmentController {
     public Page<DepartmentDTO> getAllDepartments(
             Pageable pageable,
             @RequestParam(name = "search", required = false) String search,
-            DepartmentFilterForm filterForm) {
+            DepartmentFilterFormm filterForm) {
         Page<Department> entityPages = service.getAllDepartments(pageable, search, filterForm);
 
         // convert entities --> dtos

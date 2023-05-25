@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Data
 @NoArgsConstructor
-public class DepartmentFilterForm {
+public class DepartmentFilterFormm {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdDate;
 

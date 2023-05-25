@@ -1,7 +1,7 @@
 package com.example.review3.service;
 
 import com.example.review3.entity.Department;
-import com.example.review3.form.DepartmentFilterForm;
+import com.example.review3.form.DepartmentFilterFormm;
 import com.example.review3.repository.IDepartmentRepository;
 import com.example.review3.specification.DepartmentSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class DepartmentService implements IDepartmentService {
 //    }
 
     @Override
-    public Page<Department> getAllDepartments(Pageable pageable, String search, DepartmentFilterForm filterForm) {
+    public Page<Department> getAllDepartments(Pageable pageable, String search, DepartmentFilterFormm filterForm) {
 
         Specification<Department> where = DepartmentSpecification.buildWhere(search, filterForm);
         return repository.findAll(where, pageable);

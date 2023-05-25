@@ -1,11 +1,9 @@
 package com.example.review3.service;
 
 import com.example.review3.entity.Department;
-import com.example.review3.form.DepartmentFilterForm;
+import com.example.review3.form.DepartmentFilterFormm;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.List;
 
 /**
  * Created by quan0
@@ -14,7 +12,7 @@ import java.util.List;
  */
 public interface IDepartmentService {
 //    public List<Department> getAllDepartments();
-    public Page<Department> getAllDepartments(Pageable pageable, String search, DepartmentFilterForm departmentFilterForm);
+    public Page<Department> getAllDepartments(Pageable pageable, String search, DepartmentFilterFormm departmentFilterForm);
 
     public Department getDepartmentByID(int id);
 }

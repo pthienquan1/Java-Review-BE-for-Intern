@@ -1,7 +1,7 @@
 package com.example.review3.specification;
 
 import com.example.review3.entity.Department;
-import com.example.review3.form.DepartmentFilterForm;
+import com.example.review3.form.DepartmentFilterFormm;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -18,7 +18,7 @@ import java.util.Date;
 public class DepartmentSpecification {
 
     @SuppressWarnings("deprecation")
-    public static Specification<Department> buildWhere(String search, DepartmentFilterForm filterForm) {
+    public static Specification<Department> buildWhere(String search, DepartmentFilterFormm filterForm) {
 
         Specification<Department> where = null;
 
