@@ -2,6 +2,7 @@ package review.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
 /**
  * Created by quan0
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class AccountDTO {
+public class AccountDTO extends RepresentationModel<DepartmentDTO> {
     private int id;
     private String username;
     private String departmentName;

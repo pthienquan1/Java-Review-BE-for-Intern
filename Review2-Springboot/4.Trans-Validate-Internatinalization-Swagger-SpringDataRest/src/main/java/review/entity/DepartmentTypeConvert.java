@@ -8,18 +8,26 @@ import javax.persistence.Converter;
  * Date 5/25/2023 - 2:36 PM
  * Description: ...
  */
+
 @Converter(autoApply = true)
 public class DepartmentTypeConvert implements AttributeConverter<Department.Type, String> {
+
     @Override
     public String convertToDatabaseColumn(Department.Type type) {
-        if(type == null){
+        if (type == null) {
             return null;
         }
+
         return type.getValue();
     }
 
     @Override
     public Department.Type convertToEntityAttribute(String sqlValue) {
-        return null;
+        if (sqlValue == null) {
+            return null;
+        }
+
+        return Department.Type.toEnum(sqlValue);
     }
+
 }

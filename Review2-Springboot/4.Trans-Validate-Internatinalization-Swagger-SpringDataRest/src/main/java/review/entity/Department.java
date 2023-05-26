@@ -36,14 +36,14 @@ public class Department implements Serializable {
     @Column(name="total_member", nullable = false)
     private int totalMember;
 
-    @Column(name="`type`", nullable = false)
+    @Column(name = "`type`", nullable = false)
     @Convert(converter = DepartmentTypeConvert.class)
     private Type type;
 
     @Column(name="created_date",updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
-    private Date created_date;
+    private Date createdDate;
 
     @OneToMany(mappedBy = "department")
     private List<Account> accounts;
@@ -69,8 +69,4 @@ public class Department implements Serializable {
             return null;
         }
     }
-
-    
-
-
 }

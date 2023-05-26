@@ -4,10 +4,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import review.entity.Account;
 import review.form.AccountFilterForm;
 import review.repository.IAccountRepository;
+import review.specification.account.AccountSpecification;
 
 /**
  * Created by quan0
@@ -22,7 +24,8 @@ public class AccountService implements IAccountService{
 
     @Override
     public Page<Account> getAllAccounts(Pageable pageable, AccountFilterForm filterForm, String search) {
-        return null;
+        Specification<Account> where = AccountSpecification.buildWhere(search,filterForm);
+        return repository.findAll(where,pageable);
     }
 
     @Override

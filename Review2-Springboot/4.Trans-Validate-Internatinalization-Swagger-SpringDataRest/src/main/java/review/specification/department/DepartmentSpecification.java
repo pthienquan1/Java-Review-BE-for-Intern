@@ -18,32 +18,38 @@ import java.util.Date;
  * Description: ...
  */
 public class DepartmentSpecification {
+
     @SuppressWarnings("deprecation")
-    private static Specification<Department> buildWhere(String search, DepartmentFilterForm filterForm){
+    public static Specification<Department> buildWhere(String search, DepartmentFilterForm filterForm) {
+
         Specification<Department> where = null;
-        if(!StringUtils.isEmpty(search) ){
+
+        if (!StringUtils.isEmpty(search)) {
             search = search.trim();
-            CustomSpecification username = new CustomSpecification("username",search);
+            CustomSpecification username = new CustomSpecification("username", search);
             where = Specification.where(username);
         }
-        if(filterForm != null && filterForm.getCreatedDate() != null){
+        // if there is filter by min created date
+        if (filterForm != null && filterForm.getCreatedDate() != null) {
             CustomSpecification createdDate = new CustomSpecification("createdDate", filterForm.getCreatedDate());
-            if(where == null){
+            if (where == null) {
                 where = createdDate;
-            }
-            else{
-                where= where.and(createdDate);
+            } else {
+                where = where.and(createdDate);
             }
         }
-        if(filterForm != null && filterForm.getMinCreatedDate() != null){
-            CustomSpecification minCreatedDate = new CustomSpecification("minCreatedDate",filterForm.getMinCreatedDate());
-            if(where == null){
+
+        // if there is filter by min created date
+        if (filterForm != null && filterForm.getMinCreatedDate() != null) {
+            CustomSpecification minCreatedDate = new CustomSpecification("minCreatedDate", filterForm.getMinCreatedDate());
+            if (where == null) {
                 where = minCreatedDate;
-            }
-            else{
-                where= where.and(minCreatedDate);
+            } else {
+                where = where.and(minCreatedDate);
             }
         }
+
+        // if there is filter by max created date
         if (filterForm != null && filterForm.getMaxCreatedDate() != null) {
             CustomSpecification maxCreatedDate = new CustomSpecification("maxCreatedDate", filterForm.getMaxCreatedDate());
             if (where == null) {
@@ -53,7 +59,7 @@ public class DepartmentSpecification {
             }
         }
 
-
+        // if there is filter by min year
         if (filterForm != null && filterForm.getMinYear() != null) {
             CustomSpecification minYear = new CustomSpecification("minYear", filterForm.getMinYear());
             if (where == null) {
@@ -63,8 +69,9 @@ public class DepartmentSpecification {
             }
         }
 
+        // if there is filter by type
         if (filterForm != null && filterForm.getType() != null) {
-            CustomSpecification type = new CustomSpecification("type", filterForm.getType());
+            CustomSpecification type = new CustomSpecification("`type`", filterForm.getType());
             if (where == null) {
                 where = type;
             } else {
@@ -74,28 +81,35 @@ public class DepartmentSpecification {
 
         return where;
     }
-    }
+}
 
-
-@NoArgsConstructor
-@RequiredArgsConstructor
 @SuppressWarnings("serial")
+@RequiredArgsConstructor
 class CustomSpecification implements Specification<Department> {
+
     @NonNull
     private String field;
     @NonNull
     private Object value;
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
-    public Predicate toPredicate(Root<Department> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+    public Predicate toPredicate(
+            Root<Department> root,
+            CriteriaQuery<?> query,
+            CriteriaBuilder criteriaBuilder) {
 
-        if(field.equalsIgnoreCase("username")){
+        if (field.equalsIgnoreCase("username")) {
             Join join = root.join("accounts", JoinType.LEFT);
             return criteriaBuilder.like(join.get("username"), "%" + value.toString() + "%");
         }
-        if(field.equalsIgnoreCase("createdDate")){
-            return criteriaBuilder.equal(root.get("createdDate").as(java.sql.Date.class),(Date) value);
+
+        if (field.equalsIgnoreCase("createdDate")) {
+            return criteriaBuilder.equal(
+                    root.get("createdDate").as(java.sql.Date.class),
+                    (Date) value);
         }
+
         if (field.equalsIgnoreCase("minCreatedDate")) {
             return criteriaBuilder.greaterThanOrEqualTo(
                     root.get("createdDate").as(java.sql.Date.class),
@@ -114,8 +128,8 @@ class CustomSpecification implements Specification<Department> {
                     (Integer) value);
         }
 
-        if (field.equalsIgnoreCase("type")) {
-            return criteriaBuilder.equal(root.get("type"), value);
+        if (field.equalsIgnoreCase("`type`")) {
+            return criteriaBuilder.equal(root.get("`type`"), value);
         }
 
         return null;
