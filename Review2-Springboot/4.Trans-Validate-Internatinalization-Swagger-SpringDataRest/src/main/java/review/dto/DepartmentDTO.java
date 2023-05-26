@@ -26,7 +26,7 @@ public class DepartmentDTO extends RepresentationModel<DepartmentDTO> {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createdDate;
 
-    private List<AccountDTO> accountDTOS;
+    private List<AccountDTO> accounts;
 
     @Data
     @NoArgsConstructor

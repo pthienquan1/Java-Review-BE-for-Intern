@@ -10,7 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import review.dto.DepartmentDTO;
 import review.entity.Department;
+import review.form.CreatingDepartmentForm;
 import review.form.DepartmentFilterForm;
+import review.form.UpdateDepartmentForm;
 import review.service.IDepartmentService;
 
 import java.util.List;
@@ -58,5 +60,15 @@ public class DepartmentController {
 
         return dto;
 
+    }
+
+    @PostMapping()
+    public void createDepartment(@RequestBody CreatingDepartmentForm creatingDepartmentForm){
+        service.createDepartment(creatingDepartmentForm);
+    }
+    @PutMapping(value = "/{id}")
+    public void updateDepartment(@PathVariable(value = "id") int id, @RequestBody UpdateDepartmentForm updateDepartmentForm){
+        updateDepartmentForm.setId(id);
+        service.updateDepartment(updateDepartmentForm);
     }
 }
