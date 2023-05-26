@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import review.dto.AccountDTO;
 import review.entity.Account;
 import review.form.AccountFilterForm;
+import review.form.CreatingAccountForm;
 import review.repository.IAccountRepository;
 import review.service.IAccountService;
 import review.service.IDepartmentService;
@@ -52,5 +53,10 @@ public class AccountController {
         dto.add(linkTo(methodOn(AccountController.class).getAccountByID(id)).withSelfRel());
 
         return dto;
+    }
+
+    @PostMapping()
+    public void createAccount(@RequestBody CreatingAccountForm creatingAccountForm){
+        service.createAccount(creatingAccountForm);
     }
 }
