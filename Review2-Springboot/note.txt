@@ -58,3 +58,4 @@ SPECIFICATION
 HATEOAS:
 cung cấp 1 số thông tin phụ cho API
 
+@Transactional: khi có exeption xảy ra thì sẽ rollback lại giao tác đó

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import review.entity.Account;
 import review.entity.Department;
@@ -43,6 +44,7 @@ public class DepartmentService implements IDepartmentService{
         return repository.findById(id).get();
     }
 
+    @Transactional
     @Override
     public void createDepartment(CreatingDepartmentForm creatingDepartmentForm) {
         Department department = modelMapper.map(creatingDepartmentForm, Department.class);

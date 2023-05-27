@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import review.dto.DepartmentDTO;
 import review.entity.Department;
@@ -15,6 +16,7 @@ import review.form.DepartmentFilterForm;
 import review.form.UpdateDepartmentForm;
 import review.service.IDepartmentService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -27,6 +29,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
  */
 @RestController
 @RequestMapping(value="/api/v1/departments")
+@Validated
 public class DepartmentController {
     @Autowired
     private ModelMapper modelMapper;
@@ -63,7 +66,7 @@ public class DepartmentController {
     }
 
     @PostMapping()
-    public void createDepartment(@RequestBody CreatingDepartmentForm creatingDepartmentForm){
+    public void createDepartment(@RequestBody @Valid CreatingDepartmentForm creatingDepartmentForm){
         service.createDepartment(creatingDepartmentForm);
     }
     @PutMapping(value = "/{id}")
