@@ -7,12 +7,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import review.entity.Account;
 import review.entity.Department;
 import review.form.CreatingDepartmentForm;
 import review.form.DepartmentFilterForm;
 import review.form.UpdateDepartmentForm;
+import review.repository.IAccountRepository;
 import review.repository.IDepartmentRepository;
 import review.specification.department.DepartmentSpecification;
+
+import java.util.List;
 
 /**
  * Created by quan0
@@ -24,6 +28,8 @@ public class DepartmentService implements IDepartmentService{
     @Autowired
     private IDepartmentRepository repository;
 
+    @Autowired
+    private IAccountRepository accountRepository;
     @Autowired
     private ModelMapper modelMapper;
     @Override
@@ -38,9 +44,16 @@ public class DepartmentService implements IDepartmentService{
     }
 
     @Override
-    public void createDepartment(CreatingDepartmentForm creatingDepartmentForm){
-        Department department = modelMapper.map(creatingDepartmentForm,Department.class);
+    public void createDepartment(CreatingDepartmentForm creatingDepartmentForm) {
+        Department department = modelMapper.map(creatingDepartmentForm, Department.class);
+        //create department
         repository.save(department);
+        //create account
+        List<Account> accountEntities = department.getAccounts();
+        for(Account a: accountEntities){
+            a.setDepartment(department);
+        }
+        accountRepository.saveAll(accountEntities);
     }
     @Override
     public void updateDepartment(UpdateDepartmentForm updateDepartmentForm){
