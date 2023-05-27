@@ -62,4 +62,8 @@ public class DepartmentService implements IDepartmentService{
         Department department = modelMapper.map(updateDepartmentForm,Department.class);
         repository.save(department);
     }
+
+    public boolean isDepartmentExistsByName(String name) {
+        return repository.existsByName(name);
+    }
 }

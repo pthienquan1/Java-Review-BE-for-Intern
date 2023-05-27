@@ -10,4 +10,5 @@ import review.entity.Department;
  * Description: ...
  */
 public interface IDepartmentRepository extends JpaRepository<Department, Integer>, JpaSpecificationExecutor<Department> {
+    boolean existsByName(String name);
 }
