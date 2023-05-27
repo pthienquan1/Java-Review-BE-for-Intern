@@ -66,4 +66,7 @@ public class DepartmentService implements IDepartmentService{
     public boolean isDepartmentExistsByName(String name) {
         return repository.existsByName(name);
     }
+    public boolean isDepartmentExistsByID(Integer id){
+        return repository.existsById(id);
+    }
 }

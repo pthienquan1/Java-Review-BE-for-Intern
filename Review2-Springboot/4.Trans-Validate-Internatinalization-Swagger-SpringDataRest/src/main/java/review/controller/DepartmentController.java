@@ -15,6 +15,7 @@ import review.form.CreatingDepartmentForm;
 import review.form.DepartmentFilterForm;
 import review.form.UpdateDepartmentForm;
 import review.service.IDepartmentService;
+import review.validation.DepartmentIDExists;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -57,7 +58,7 @@ public class DepartmentController {
     }
 
     @GetMapping(value="/{id}")
-    public DepartmentDTO getDepartmentByID(@PathVariable(value = "id") int id){
+    public DepartmentDTO getDepartmentByID(@PathVariable(value = "id") @DepartmentIDExists int id){
         Department entity = service.getDepartmentById(id);
         DepartmentDTO dto = modelMapper.map(entity,DepartmentDTO.class);
 
@@ -70,7 +71,7 @@ public class DepartmentController {
         service.createDepartment(creatingDepartmentForm);
     }
     @PutMapping(value = "/{id}")
-    public void updateDepartment(@PathVariable(value = "id") int id, @RequestBody UpdateDepartmentForm updateDepartmentForm){
+    public void updateDepartment(@PathVariable(value = "id") @DepartmentIDExists int id, @RequestBody UpdateDepartmentForm updateDepartmentForm){
         updateDepartmentForm.setId(id);
         service.updateDepartment(updateDepartmentForm);
     }

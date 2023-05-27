@@ -19,4 +19,5 @@ public interface IDepartmentService {
     public void createDepartment(CreatingDepartmentForm creatingDepartmentForm);
     public void updateDepartment(UpdateDepartmentForm updateDepartmentForm);
     public boolean isDepartmentExistsByName(String name);
+    public boolean isDepartmentExistsByID(Integer id);
 }
