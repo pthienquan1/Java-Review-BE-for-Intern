@@ -11,4 +11,5 @@ import review.entity.Account;
  * Description: ...
  */
 public interface IAccountRepository extends JpaRepository<Account, Integer>, JpaSpecificationExecutor<Account> {
+    boolean existsByUsername(String username);
 }

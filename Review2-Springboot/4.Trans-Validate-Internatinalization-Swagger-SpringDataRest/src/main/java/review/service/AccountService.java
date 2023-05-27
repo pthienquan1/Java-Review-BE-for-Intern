@@ -53,4 +53,8 @@ public class AccountService implements IAccountService{
         Account account = modelMapper.map(creatingAccountForm,Account.class);
         repository.save(account);
     }
+    @Override
+    public boolean isAccountExistsByUsername(String username) {
+        return repository.existsByUsername(username);
+    }
 }

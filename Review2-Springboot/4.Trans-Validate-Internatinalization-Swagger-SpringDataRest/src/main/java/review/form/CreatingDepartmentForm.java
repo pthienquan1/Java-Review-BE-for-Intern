@@ -4,12 +4,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import review.entity.Account;
+import review.validation.AccountUsernameNotExists;
 import review.validation.DepartmentNameNotExists;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.List;
 
 /**
@@ -32,11 +31,17 @@ public class CreatingDepartmentForm {
     @NotNull(message = "Type mustn't null")
     @Pattern(regexp = "DEV|TEST|PM|SCRUMMASTER", message = "Type must has only one of: TEST / DEV / PM " )
     private String type;
-    private List<Account> accounts;
+    @NotEmpty(message = "Accounts mustn't be empty")
+    private List<@Valid Account> accounts;
 
     @Data
     @NoArgsConstructor
-    private static class Account{
+    public static class Account {
+
+        @NotBlank(message = "The name mustn't be null value")
+        @Length(max = 50, message = "The name's length is max 50 characters")
+        @AccountUsernameNotExists
         private String username;
     }
 }
+

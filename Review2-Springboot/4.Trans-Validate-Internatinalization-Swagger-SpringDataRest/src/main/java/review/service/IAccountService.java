@@ -16,4 +16,5 @@ public interface IAccountService {
     public Account getAccountById(int id);
     
     public void createAccount(CreatingAccountForm creatingAccountForm);
+    public boolean isAccountExistsByUsername(String username);
 }

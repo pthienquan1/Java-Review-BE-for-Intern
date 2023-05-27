@@ -59,3 +59,10 @@ HATEOAS:
 cung cấp 1 số thông tin phụ cho API
 
 @Transactional: khi có exeption xảy ra thì sẽ rollback lại giao tác đó
+
+VALIDATE:
+1-DefaultMessage
+2-Modify Output
+3-Custom Annotation
+4-List
+
