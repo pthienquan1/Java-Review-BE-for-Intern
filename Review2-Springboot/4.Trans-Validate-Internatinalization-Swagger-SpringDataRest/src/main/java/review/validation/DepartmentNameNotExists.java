@@ -31,7 +31,7 @@ import review.validation.DepartmentNameNotExists.List;
 @Constraint(validatedBy = { DepartmentNameNotExistsValidator.class })
 @Repeatable(List.class)
 public @interface DepartmentNameNotExists {
-    String message() default "Department name exists already!";
+    String message() default "{Department.createDepartment.form.name.NotExists}";
 
     Class<?>[] groups() default {};
 

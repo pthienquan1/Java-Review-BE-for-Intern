@@ -19,8 +19,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class CreatingDepartmentForm {
-    @NotBlank(message = "The name mustn't null")
-    @Length(max = 50,message = "Max length of name is 50 characters")
+    @NotBlank(message = "{Department.createDepartment.form.name.NotBlank}")
+    @Length(max = 50,message = "{Department.createDepartment.form.name.Length}")
     @DepartmentNameNotExists
     private String name;
 
