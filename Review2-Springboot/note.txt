@@ -66,3 +66,7 @@ VALIDATE:
 3-Custom Annotation
 4-List
 
+SPRING DATA REST
+Spring data rest được xây dựng dựa trên dự án Spring data và giúp dễ dàng xây dựng các rest api cơ bản Nó giảm thời gian làm thủ công thường 
+liên quan đến các chức năng CRUD cơ bản cho các ứng dụng web đơn giản.
+
